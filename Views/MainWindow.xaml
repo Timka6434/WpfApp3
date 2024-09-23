@@ -1,0 +1,17 @@
+﻿<Window x:Class="PocketFinansistWPF.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PocketFinansistWPF.Views"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+    <Grid>
+        <Frame x:Name="MainFrame"  Margin="370,0,10,0" />
+
+        <!-- Кнопка, привязанная к команде навигации -->
+        <Button Content="Перейти на Page1" Width="150" Command="{Binding NavigateCommand}" 
+                CommandParameter="{Binding NavigationService, ElementName=MainFrame}" Margin="53,217,0,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" />
+    </Grid>
+</Window>
