@@ -12,7 +12,7 @@ namespace PocketFinansistWPF.Models
         private string _accountName { get; set; }
         private decimal _balance { get; set; }
         private bool _isLocked { get; set; }
-        private DateTime _DataCreateAccount {  get; set; }
+        private DateTime _dataCreateAccount {  get; set; }
 
         public Account(string name) 
         {
@@ -20,13 +20,19 @@ namespace PocketFinansistWPF.Models
             _accountName = name;
             _balance = 0;
             _isLocked = true;
-            _DataCreateAccount = DateTime.Now;
+            _dataCreateAccount = DateTime.Now;
         }
+        public string GetAccountId() => _id;
+
         public string GetAccountName() => _accountName;
         public void SetAccountName(string SetName) => _accountName = SetName;
 
-        public void SetBalance(decimal  Balance) => _balance = Balance;
+        public decimal GetBalance() => _balance;
+        public void SetBalance(decimal Balance) => _balance = Balance;
 
+        public bool IsLocked() => _isLocked;
         public void UnlockAccount() => _isLocked = false;
+
+        public DateTime GetDataCreateAccount() => _dataCreateAccount;
     }
 }

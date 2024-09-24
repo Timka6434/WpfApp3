@@ -15,57 +15,42 @@ namespace WpfApp3.ViewModels
 {
     public partial class MainViewModel : ObservableObject
     {
-        [ObservableProperty]
-        private Account _currentAccount;
+        public ObservableCollection<AccountViewModel> Accounts { get; set; }
 
         [ObservableProperty]
-        private string _accountNameInput;
-        
-        [ObservableProperty]        
-        ObservableCollection<Account> _accounts = new ObservableCollection<Account>();
+        private AccountViewModel _accountViewModel;
 
-
-        public ICommand NavigateCommand { get; }
+        [ObservableProperty]
+        private string _accountName;
 
         public MainViewModel()
         {
-            NavigateCommand = new RelayCommand<object>(Navigate);
-        }
-
-        private void Navigate(object parameter)
-        {
-            if (parameter is NavigationService navigationService)
-            {
-                navigationService.Navigate(new Uri("Views/Page1.xaml", UriKind.Relative));
-            }
+            Accounts = new ObservableCollection<AccountViewModel>();
         }
 
         [RelayCommand]
         private void ActivateAccount()
         {
-            if (CurrentAccount == null)
-            {
-                MessageBox.Show("Аккаунт не создан!");
-                return;
-            }
 
-            if (CurrentAccount.GetAccountName() != null)
+            if (_accountViewModel.Id != null)
             {
-                CurrentAccount.UnlockAccount();
+                _accountViewModel.UnlockAccount();
             }
         }
 
         [RelayCommand]
         public void CreateAccount()
         {
-            if(string.IsNullOrWhiteSpace(AccountNameInput))
+            if(string.IsNullOrWhiteSpace(AccountName))
             {
                 MessageBox.Show("Введите корректное имя для аккаунта!");
                 return;
             }
-            CurrentAccount = new Account(AccountNameInput);
+            var account = new Account(AccountName);
+            var accountViewModel = new AccountViewModel(account);
 
-            Accounts.Add(CurrentAccount);
+            Accounts.Add(accountViewModel);
+            AccountViewModel = accountViewModel;
         }
         
     }
