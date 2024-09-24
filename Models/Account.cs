@@ -3,16 +3,72 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 
 namespace PocketFinansistWPF.Models
 {
      public partial class Account
-    {
-        private string _id {  get; set; }
-        private string _accountName { get; set; }
-        private decimal _balance { get; set; }
-        private bool _isLocked { get; set; }
-        private DateTime _dataCreateAccount {  get; set; }
+     {
+        private string _id;
+        public string ID
+        {
+            get => _id;
+        }
+
+
+        private string _accountName;
+        public string AccountName
+        {
+            get => _accountName;
+            set
+            {
+                if (!string.IsNullOrEmpty(value))
+                {
+                    _accountName = value;
+                }
+                else
+                {
+                    throw new ArgumentException("Name is can't will null");
+                }
+            }
+        }
+
+        private decimal _balance;
+        public decimal Balance
+        {
+            get { return _balance; }
+            set
+            {
+                if (value > 0)
+                {
+                    _balance = value;
+                }
+            }
+        }
+
+        private bool _isLocked;
+        public bool IsLocked
+        {
+            get => _isLocked;
+            set
+            {
+                if (_balance >= 0)
+                {
+                    _isLocked = value;  
+                }
+                else if(_balance < 0)
+                {
+                    _isLocked = true;
+                }
+            }
+        }
+
+        private DateTime _dataCreateAccount;
+        public DateTime DataCreateAccount
+        {
+            get => _dataCreateAccount;
+        }
+
 
         public Account(string name) 
         {
@@ -22,17 +78,5 @@ namespace PocketFinansistWPF.Models
             _isLocked = true;
             _dataCreateAccount = DateTime.Now;
         }
-        public string GetAccountId() => _id;
-
-        public string GetAccountName() => _accountName;
-        public void SetAccountName(string SetName) => _accountName = SetName;
-
-        public decimal GetBalance() => _balance;
-        public void SetBalance(decimal Balance) => _balance = Balance;
-
-        public bool IsLocked() => _isLocked;
-        public void UnlockAccount() => _isLocked = false;
-
-        public DateTime GetDataCreateAccount() => _dataCreateAccount;
-    }
+     }
 }
