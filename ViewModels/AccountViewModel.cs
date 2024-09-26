@@ -18,9 +18,6 @@ namespace WpfApp3.ViewModels
         [ObservableProperty]
         private Account _account;
 
-        [ObservableProperty]
-        private Account _selectedAccount;
-
         public AccountViewModel()
         {
             Accounts = new ObservableCollection<Account>();
@@ -51,6 +48,11 @@ namespace WpfApp3.ViewModels
             if (string.IsNullOrWhiteSpace(AccountName))
             {
                 MessageBox.Show("Введите корректное имя для аккаунта!");
+                return;
+            }
+            if (Accounts.Any(a=> a.AccountName == AccountName))
+            {
+                MessageBox.Show("Аккаунт с таким именем существует!");
                 return;
             }
             var account = new Account(AccountName);

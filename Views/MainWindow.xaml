@@ -3,15 +3,25 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PocketFinansistWPF.Views"
+        xmlns:local="clr-namespace:WpfApp3.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    
+    <Window.DataContext>
+        <local:MainViewModel/>
+    </Window.DataContext>
 
     <Grid>
-        <Frame x:Name="MainFrame"  Margin="370,0,10,0" />
+        <Frame x:Name="MainFrame" Margin="171,0,0,0" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="619" Height="424" VerticalAlignment="Top" />
 
         <!-- Кнопка, привязанная к команде навигации -->
-        <Button Content="Перейти на Page1" Width="150" Command="{Binding NavigateCommand}" 
-                CommandParameter="{Binding NavigationService, ElementName=MainFrame}" Margin="53,217,0,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" />
+        <Button Content="Управление аккаунтами" Width="150" Command="{Binding NavigateCommand}" 
+                CommandParameter="WpfApp3.Views.Page1" Margin="10,19,0,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" />
+        <Button Content="Перейти на Page2" Width="150" Command="{Binding NavigateCommand}" 
+            CommandParameter="WpfApp3.Views.Page2" Margin="10,66,0,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" />
+        <Border Width="1" Background="Black" Margin="165,0,0,0" Height="434" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
+
+        
+
     </Grid>
 </Window>
